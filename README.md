@@ -1,6 +1,7 @@
 # Ejemplo carrito de compras con objeto y template
 
-## Todo con fines educativos, si puedes mejorar el codigo, bienvenido!
+## Todo con fines educativos 
+si puedes mejorar el código, bienvenido!
 
 ## Template
 ```html
