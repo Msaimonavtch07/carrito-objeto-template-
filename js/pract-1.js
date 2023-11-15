@@ -1,155 +1,155 @@
-const lista = document.querySelector("#lista");
-const fragment = document.createDocumentFragment();
-const liTemplate = document.querySelector('#liTemplate');
+// console.log("bienvenido🍃");
 
-const clickPaises = () => console.log('me diste click...');
+const url = 'https://jsonplaceholder.typicode.com/posts/';
 
-const arrayPaises = ['peru', 'colombia', 'venezuela', 'argentina']
+const findPostById = async (id) => {
+    try {
+        
+        const res = await fetch(url + id);
+        const post = await res.json();
 
-arrayPaises.forEach((pais)  => {
-    const clone  = liTemplate.content.firstElementChild.cloneNode(true);
-    clone.querySelector('span').textContent = pais;
+        console.log(post);
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+findPostById(25)
+
+
+//fetch(url)
+//    .then((res) => res.json())
+//    .then((data) => console.log(data))
+//    .catch((e) => console.log(e))
+//    .finally(console.log('finalizado el procedimiento'))
+
+
+
+
+
+
+
+
+
+
+//const findPostById = (id) => {
+//    const post = posts.find(item => item.id === id);
+
+//    return new Promise((resolve, reject) => {
+//        if (post) {
+//            resolve(post);
+//       } else {
+//            reject('no se encontro el post con id 👉 ' + id);
+//        }
+//    }); 
+//;};
+
+//const findPostById = (id) => 
+//    new Promise((resolve, reject) => {
     
-    clone.addEventListener('click', clickPaises);
-
-    fragment.appendChild(clone);
-})
-
-lista.appendChild(fragment);
-
-
-
-
-
-
-
-
-
-
-//const clone = liTemplate.content.cloneNode(true);
-//clone.querySelector('.text-primary').textContent = "agregue a traves de un template...";
-
-//lista.appendChild(clone);
-
-
-
-
-
-
-
-
-
-
-
-
-
-    {/*<li class="list">
-            <b><i>pais:</i></b>
-            <span class="text-primary">
-                Aqui va el pais escogido...
-            </span>
-    </li>*/}
-
-//arrayPaises.forEach((pais) => {
-    //const li = document.createElement("li");
-    //li.className = 'list'; 
-
-    //const b = document.createElement('b');
-    //b.textContent = 'pais:';
-
-    //const i = document.createElement('i');
-    //i.textContent = 'pais:';
-
-    //const span = document.createElement('span');
-    //span.className = 'text-primary';
-    //span.textContent = pais;
-
-    //li.appendChild(b);
-    //li.appendChild(i);
-    //li.appendChild(span);
-
-    //element.appendChild(li);
-//});    
-
-//lista.appendChild(element);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//arrayPaises.forEach((paises) => {
-//    const newNode = document.createElement('li');
-//    newNode.textContent = paises;
+//    setTimeout(() => {
+//        const post = posts.find(item => item.id === id);
     
-//    const referenceNode = element.firstChild;
+//        if (post) {
+//            resolve(post);
+//       } else {
+//            reject('no se encontro el post con id 👉 ' + id);
+//        }
+//    }, 2000);
+//    }); 
+
+
+// findPostById(1)
+//    .then((post) => console.log(post))
+//    .catch((e) => console.log(e));
+
+//const buscar = async () => {
+//     try {
+//        const rePost = await Promise.all([
+//            findPostById(1),
+//            findPostById(2),
+//        ])
+//        console.log(rePost)
+        
+        // const postUno = await findPostById(1)
+        // const postDos = await findPostById(1)
+        // console.log(postUno.title, postDos.title)
+
+//     } catch (error) {
+//        console.log(error)
+//     } finally {
+//        console.log('esto se ejecuta si o si...')
+//     }
+//};
+
+//buscar()
+//console.log('fin del codigo...')    
+
+
+
+
+
+
+//   findPostById(1)
+//    .then((post) => {
+//        console.log(post)
+//        return findPostById(2)
+//    })
+//    .then((post) => {
+//        console.log(post)
+//        return findPostById(3)
+//    })
+//    .then((post) => {
+ //       console.log(post)
+//        return findPostById(4)
+//    })
+//    .catch((e) => console.log(e))
+
+
+
+
+
     
-//    element.insertBefore(newNode, referenceNode);
+
+
+
+// const findPostById = (id, callback) => {
+     
+//     const post = posts.find(item => item.id === id);
+
+//     if (post) {
+//         callback(null, post);    
+//     } else {
+//       callback('no se encontro el post con id ' +id);
+//     }
+
+// };
+
+//findPostById(1, (err, post) => {
+//    if (err) {
+//        return console.log(err);
+//    };
+//    console.log(post);
+
+//    findPostById(2, (err, post) => {
+//       if (err) {
+//            return console.log(err);
+//        };
+//        console.log(post);
+
+//        findPostById(3, (err, post) => {
+//            if (err) {
+//                return console.log(err);
+//            };
+//            console.log(post);
+
+//            findPostById(4, (err, post) => {
+//                if (err) {
+//                    return console.log(err);
+//                };
+//                console.log(post);
+//            });
+//        });
+//    });
 //});
 
-//lista.appendChild(element);
-
-
-
-
-// arrayPaises.forEach((paises) => {
-//     lista.innerHTML += `<li>${paises}</li>`;
-// });
-
-
-
-
-
-// const h1 = document.querySelector("#titleWeb");
-// const boton = document.querySelector(".btn-primary");
-
-// boton.addEventListener("click", () => {
-//     console.log("me diste click...");
-//     h1.style.color = "blue";
-//     h1.textContent = "holaa bienvenido... 🍃"
-// })
-
-
-
-
-
-
-
-
-
-// console.log(h1.textContent);
-
-// h1.textContent = "texto añadido...";
-// h1.style.backgroundColor = "blue";
-// h1.style.color = "white";
-
-
-
-
-
-// console.log(document.getElementById("titleWeb"));
-// console.log(document.getElementById("titleWeb").textContent);
-
-// console.log(document.querySelector("h1"))
-
-// console.log(document.querySelectorAll(".container .text-danger"));
-
-
-
-
-
-
-
-
-// console.log("🍃🍒😋🍓");
-// console.log(document);
-// console.log(document.head);
-// console.log(document.title);
