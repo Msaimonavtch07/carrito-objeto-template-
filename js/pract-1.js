@@ -1,155 +1,73 @@
-// console.log("bienvenido🍃");
+console.log('welcome to my pag 🍃'); 
 
-const url = 'https://jsonplaceholder.typicode.com/posts/';
+document.addEventListener('DOMContentLoaded', () => {
+    fetchData()
+})
 
-const findPostById = async (id) => {
+const fetchData = async () => {
+    // console.log('ejecutando datos...')
+    
     try {
+        loadingData(true)
         
-        const res = await fetch(url + id);
-        const post = await res.json();
+        const res = await fetch('https://rickandmortyapi.com/api/character')
+        const data = await res.json()
 
-        console.log(post);
-
+        // console.log(data)
+        pintarCard(data)
     } catch (error) {
-        console.log(error);
+        console.log(error)
+    } finally {
+        loadingData(false)
+    }
+
+}
+
+const pintarCard = (data) => {
+    const cards = document.getElementById('card-dinamicas');
+    const templateCard = document.getElementById('template-card').content;
+    const fragment = document.createDocumentFragment();
+    // console.log(data);
+    
+    data.results.forEach(item => {
+        // console.log(item);
+        const clone = templateCard.cloneNode(true);
+        clone.querySelector('h5').textContent = item.name;
+        clone.querySelector('p').textContent = item.species;
+        clone.querySelector('.card-img-top').setAttribute('src', item.image);
+
+        fragment.appendChild(clone);
+    });
+    
+    // guardamos del fragment para evitar el reflow...
+    cards.appendChild(fragment);
+};
+
+// aqui ocupamos el loading...
+const loadingData = estado => {
+    const loading = document.getElementById('loading')
+    if (estado) {
+        loading.classList.remove('d-none')
+    } else {
+        loading.classList.add('d-none')
     }
 }
-findPostById(25)
 
 
-//fetch(url)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//fetch('https://pokeapi.co/api/v2/pokemon/ditto')
 //    .then((res) => res.json())
-//    .then((data) => console.log(data))
-//    .catch((e) => console.log(e))
-//    .finally(console.log('finalizado el procedimiento'))
-
-
-
-
-
-
-
-
-
-
-//const findPostById = (id) => {
-//    const post = posts.find(item => item.id === id);
-
-//    return new Promise((resolve, reject) => {
-//        if (post) {
-//            resolve(post);
-//       } else {
-//            reject('no se encontro el post con id 👉 ' + id);
-//        }
-//    }); 
-//;};
-
-//const findPostById = (id) => 
-//    new Promise((resolve, reject) => {
-    
-//    setTimeout(() => {
-//        const post = posts.find(item => item.id === id);
-    
-//        if (post) {
-//            resolve(post);
-//       } else {
-//            reject('no se encontro el post con id 👉 ' + id);
-//        }
-//    }, 2000);
-//    }); 
-
-
-// findPostById(1)
-//    .then((post) => console.log(post))
-//    .catch((e) => console.log(e));
-
-//const buscar = async () => {
-//     try {
-//        const rePost = await Promise.all([
-//            findPostById(1),
-//            findPostById(2),
-//        ])
-//        console.log(rePost)
-        
-        // const postUno = await findPostById(1)
-        // const postDos = await findPostById(1)
-        // console.log(postUno.title, postDos.title)
-
-//     } catch (error) {
-//        console.log(error)
-//     } finally {
-//        console.log('esto se ejecuta si o si...')
-//     }
-//};
-
-//buscar()
-//console.log('fin del codigo...')    
-
-
-
-
-
-
-//   findPostById(1)
-//    .then((post) => {
-//        console.log(post)
-//        return findPostById(2)
-//    })
-//    .then((post) => {
-//        console.log(post)
-//        return findPostById(3)
-//    })
-//    .then((post) => {
- //       console.log(post)
-//        return findPostById(4)
-//    })
-//    .catch((e) => console.log(e))
-
-
-
-
-
-    
-
-
-
-// const findPostById = (id, callback) => {
-     
-//     const post = posts.find(item => item.id === id);
-
-//     if (post) {
-//         callback(null, post);    
-//     } else {
-//       callback('no se encontro el post con id ' +id);
-//     }
-
-// };
-
-//findPostById(1, (err, post) => {
-//    if (err) {
-//        return console.log(err);
-//    };
-//    console.log(post);
-
-//    findPostById(2, (err, post) => {
-//       if (err) {
-//            return console.log(err);
-//        };
-//        console.log(post);
-
-//        findPostById(3, (err, post) => {
-//            if (err) {
-//                return console.log(err);
-//            };
-//            console.log(post);
-
-//            findPostById(4, (err, post) => {
-//                if (err) {
-//                    return console.log(err);
-//                };
-//                console.log(post);
-//            });
-//        });
-//    });
-//});
-
+//    .then((data) => console.log(data));
