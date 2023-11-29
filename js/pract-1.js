@@ -5,6 +5,7 @@ const cardEstudiante = document.querySelector('#cardEstudiante');
 const cardProfesor = document.querySelector('#cardProfesor');
 const templateEstudiante = document.querySelector('#templateEstudiante').content
 const templateProfesor = document.querySelector('#templateProfesor').content 
+const alert = document.querySelector('.alert');
 
 const estudiantesA = []; 
 const profesoresA = []; 
@@ -12,11 +13,11 @@ const profesoresA = [];
 document.addEventListener('click', (e) => {
     // console.log(e.target.dataset.nombre);
 
-    if(e.target.dataset.nombre) {
+    if(e.target.dataset.udi) {
         // console.log(e.target.matches('.btn-success'));
         if(e.target.matches('.btn-success')) {
             estudiantesA.map((item) => {
-                if(item.nombre === e.target.dataset.nombre) {
+                if(item.udi === e.target.dataset.udi) {
                     item.setestado = true;
                 }
                 console.log(item);
@@ -26,7 +27,7 @@ document.addEventListener('click', (e) => {
 
         if(e.target.matches('.btn-danger')) {
             estudiantesA.map((item) => {
-                if(item.nombre === e.target.dataset.nombre) {
+                if(item.udi === e.target.dataset.udi) {
                     item.setestado = false;
                 }
                 console.log(item);
@@ -43,6 +44,7 @@ class Personas {
     constructor (nombre, edad) {
         this.nombre = nombre;
         this.edad = edad;
+        this.udi = `${Date.now()}`
     };
 
     static pintarPersonaUI(Personas, tipo) {
@@ -105,8 +107,8 @@ class estudiantes extends Personas {
 
         clone.querySelector('.badge').textContent = this.#estado ? 'Aprobado' : 'Reprobado';    
         
-        clone.querySelector('.btn-success').dataset.nombre = this.nombre;
-        clone.querySelector('.btn-danger').dataset.nombre = this.nombre;
+        clone.querySelector('.btn-success').dataset.udi = this.udi;
+        clone.querySelector('.btn-danger').dataset.udi = this.udi;
 
         return clone;
     };
@@ -128,8 +130,16 @@ class profesores extends Personas {
 formulario.addEventListener('submit', (e) => {
     e.preventDefault()
 
+    alert.classList.add('d-none');
+
     const datos = new FormData(formulario);
     const [nombre, edad, opcion] = [...datos.values()];
+
+    if (!nombre.trim() || !edad.trim() || !opcion.trim() ) {
+        console.log('dato en blanco...');
+        alert.classList.remove('d-none');
+        return;
+    };
 
     if(opcion === 'Estudiante') {
         const estudiante = new estudiantes(nombre, edad);
